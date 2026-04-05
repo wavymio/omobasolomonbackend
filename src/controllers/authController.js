@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt")
-const User = require("../models/users")
+const User = require("../models/Users")
 const { createError, generateTokenAndSetCookie } = require("../utils/helperFuncs")
 const sendEmail = require("../utils/emailSender")
 

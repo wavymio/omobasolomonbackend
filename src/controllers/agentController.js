@@ -2,7 +2,7 @@ const { default: mongoose } = require("mongoose")
 const Property = require("../models/Properties")
 const sendEmail = require("../utils/emailSender")
 const { createError } = require("../utils/helperFuncs")
-const User = require("../models/users")
+const User = require("../models/Users")
 
 const contactAgent = async (req, res) => {
     try {

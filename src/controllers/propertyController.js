@@ -2,7 +2,7 @@ const { default: mongoose } = require("mongoose")
 const Property = require("../models/Properties")
 const { createError } = require("../utils/helperFuncs")
 const { Favourite } = require("../models/Favourites")
-const User = require("../models/users")
+const User = require("../models/Users")
 
 const getProperties = async (req, res) => {
     try {
