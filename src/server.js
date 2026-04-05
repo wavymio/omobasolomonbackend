@@ -50,7 +50,7 @@ app.get("/api/health", (req, res) => {
     res.status(200).json({ success: "I am healthy" })
 })
 
-app.listen(8080, async () => {
+app.listen(process.env.PORT, async () => {
     await connectToMongodb()
     console.log("App started successfully")
 })
