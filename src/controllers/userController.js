@@ -1,5 +1,5 @@
 const { default: mongoose } = require("mongoose")
-const User = require("../models/users")
+const User = require("../models/Users")
 const { createError } = require("../utils/helperFuncs")
 
 const getUser = async (req, res) => {
