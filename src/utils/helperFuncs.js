@@ -21,6 +21,7 @@ const generateTokenAndSetCookie = async (userId, res) => {
             // secure: false,
             secure: true,
             sameSite: "none",
+            path: "/"
         })
 
         // console.log('Cookie set successfully')
