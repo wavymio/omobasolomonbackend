@@ -1,8 +1,8 @@
 const { default: mongoose } = require("mongoose")
 const Property = require("../models/Properties")
-const sendEmail = require("../utils/emailSender")
 const { createError } = require("../utils/helperFuncs")
 const User = require("../models/Users")
+const emailService = require("../utils/emailSender")
 
 const contactAgent = async (req, res) => {
     try {
@@ -41,7 +41,7 @@ const contactAgent = async (req, res) => {
             <p style="letter-spacing: 1.1px;>Best regards,<br>Omoba Solomon and Partners</p>
         `
 
-        await sendEmail(agent.email, `New Message from ${lastname} ${firstname} on OmobaSolomonandPartners.com`, emailBody)
+        await emailService.sendEmail(agent.email, `New Message from ${lastname} ${firstname} on OmobaSolomonandPartners.com`, emailBody)
         return res.status(201).json({ success: "Email Sent Successfully" })
     } catch (err) {
         console.log("Error in contact agent controller: ", err)
@@ -64,7 +64,7 @@ const requestListing = async (req, res) => {
             <p style="letter-spacing: 1.1px;">Best regards,<br>Omoba Solomon and Partners</p>
         `
 
-        await sendEmail(process.env.COMPANY_EMAIL, `Property Listing Request on OmobaSolomonandPartners.com`, emailBody)
+        await emailService.sendEmail(process.env.COMPANY_EMAIL, `Property Listing Request on OmobaSolomonandPartners.com`, emailBody)
         return res.status(201).json({ success: "Email Sent Successfully" })
     } catch (err) {
         console.log("Error in requestListing controller: ", err)
@@ -87,7 +87,7 @@ const requestHelp= async (req, res) => {
             <p style="letter-spacing: 1.1px;">Best regards,<br>Omoba Solomon and Partners</p>
         `
 
-        await sendEmail(process.env.COMPANY_EMAIL, `Help Request on OmobaSolomonandPartners.com`, emailBody)
+        await emailService.sendEmail(process.env.COMPANY_EMAIL, `Help Request on OmobaSolomonandPartners.com`, emailBody)
         return res.status(201).json({ success: "Email Sent Successfully" })
     } catch (err) {
         console.log("Error in requestHelp controller: ", err)

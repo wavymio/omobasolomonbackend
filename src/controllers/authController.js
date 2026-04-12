@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt")
 const User = require("../models/Users")
 const { createError, generateTokenAndSetCookie } = require("../utils/helperFuncs")
-const sendEmail = require("../utils/emailSender")
+const emailService = require("../utils/emailSender")
 
 const saltRounds = parseInt(process.env.BCRYPT_SALT_ROUNDS, 10)
 
@@ -74,7 +74,7 @@ const signupController = async (req, res) => {
             userExists.verificationCodeExpires = verificationCodeSentAt + tenMins
 
             await userExists.save()
-            await sendEmail(email, 'Verify your Email', emailBody)
+            await emailService.sendEmail(email, 'Verify your Email', emailBody)
             
             return res.status(200).json({ success: "Verification code sent", data: { email, userId: userExists._id } })
         }
@@ -82,7 +82,7 @@ const signupController = async (req, res) => {
         const newUser = new User({ email, password: hashedPassword, firstname, lastname, isVerified: false, 
         verificationCode, verificationCodeSentAt, verificationCodeExpires: verificationCodeSentAt + tenMins })
         await newUser.save()
-        await sendEmail(email, 'Verify your Email', emailBody)
+        await emailService.sendEmail(email, 'Verify your Email', emailBody)
 
         return res.status(200).json({ success: "Verification code sent", data: { email, userId: newUser._id } })
     } catch (err) {
